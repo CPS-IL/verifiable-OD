@@ -1,11 +1,5 @@
 # Verifiable-Obstacle-Detection-Eval
 
-This repository is being set up.
-
-[Project Page](https://www.ayooshbansal.com/av-safety)
-
-
-
 
 ## Detectability Plots
 
