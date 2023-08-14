@@ -8,6 +8,9 @@ import sys
 from line_annotate import line_annotate
 from constants import *
 
+import warnings
+warnings.filterwarnings("ignore", message="Covariance of the parameters could not be estimated")
+
 scenarios = ["Simple", "Gap", "Incline"]
 
 def beam_last_ground_index(d, h_g = 0):
@@ -97,25 +100,23 @@ def plot_one(X, res_th1, res_th2, res_th3, filename):
     plt.xlabel('Obstacle Distance (m)')
 
     a, b, Y = find_max_line(X, res_th1)
-    print ("Line 1", a, b)
     (l,) = ax[0].plot(X, Y,color="black", ls="--")
     line_annotate("y = {}x + {}".format(round(a,round_num), round(b,round_num)), l, line_annotate_start)
     ax[0].fill_between(X, res_th1, 75, color="forestgreen", alpha=alpha_color)
 
     a, b, Y = find_max_line(X, res_th2)
-    print ("Line 2", a, b)
     (l,) = ax[1].plot(X, Y,color="black", ls="--")
     line_annotate("y = {}x + {}".format(round(a,round_num), round(b,round_num)), l, line_annotate_start)
     ax[1].fill_between(X, res_th2, 75, color="forestgreen", alpha=alpha_color)
 
     a, b, Y = find_max_line(X, res_th3)
-    print ("Line 3", a, b)
     (l,) = ax[2].plot(X, Y,color="black", ls="--")
     line_annotate("y = {}x + {}".format(round(a,round_num), round(b,round_num)), l, line_annotate_start)
     ax[2].fill_between(X, res_th3, 75, color="forestgreen", alpha=alpha_color)
 
     plt.xticks(np.arange(0, D_max + 1, step=25))
-    plt.savefig(filename, format='pdf', bbox_inches='tight')    
+    plt.savefig(filename, format='pdf', bbox_inches='tight')
+    print("[INFO] Saved plot to", filename)
 
 
 if "Simple" in scenarios:
@@ -157,7 +158,7 @@ if "Simple" in scenarios:
         else:
             res_th3.append(height_beam_3)
 
-    plot_one(X, res_th1, res_th2, res_th3, "hmin_simple_waymo.pdf")
+    plot_one(X, res_th1, res_th2, res_th3, "simple.pdf")
 
 
 if "Gap" in scenarios:
@@ -200,7 +201,7 @@ if "Gap" in scenarios:
         else:
             res_th3.append(height_beam_3 - h_gap)
 
-    plot_one(X, res_th1, res_th2, res_th3, "hmin_gap_waymo.pdf")
+    plot_one(X, res_th1, res_th2, res_th3, "gap.pdf")
 
 
 if "Incline" in scenarios:
@@ -246,4 +247,4 @@ if "Incline" in scenarios:
         else:
             res_th3.append(height_beam_3)
 
-    plot_one(X, res_th1, res_th2, res_th3, "hmin_incline_waymo.pdf")
+    plot_one(X, res_th1, res_th2, res_th3, "incline.pdf")

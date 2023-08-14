@@ -140,3 +140,5 @@ dmypy.json
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+detectability_plots/*.pdf

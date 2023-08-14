@@ -1,0 +1,4 @@
+[submodule "depth_clustering"]
+	path = depth_clustering
+	url = https://github.com/CPS-IL/depth_clustering.git
+	branch = dataset
